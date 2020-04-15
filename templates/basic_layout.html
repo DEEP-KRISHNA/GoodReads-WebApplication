@@ -2,7 +2,8 @@
 
 <head>
     <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
-    <title>Good Reads</title>
+    {% block title %}
+    {% endblock %}
     <style>
         #dummy1 {
             background-color: teal
@@ -29,22 +30,21 @@
 <body style="background-color: black">
     <header>
         <div class="row">
-            <div class="col-md-1 text-center img-respnsive">
-            </div>
             <div class="col-md-6">
                 <br>
-                <br>
-                <h1 class="text-left"><b>Good Reads<b></h1>
-                <h2 class="text-center" style="color: #F9D342;">Arena for favourite books</h2>
+                <h1 class="text-right"><b>Good Reads<b></h1>
                 <br>
             </div>
-            <div class="col-md-2 text-center">
+            <div class="col-md-6 text-left">
                 <br>
-                <img src="/static/image/openbook.jpeg" height=30%>
+                <img src="/static/image/Book_Reading.jpg" height=15%>
             </div>
         </div>
     </header>
     <hr style="color: #F9D342; border-color: #F9D342; height: 3px;">
+    {% block body %}
+    {% endblock %}
+    <!-- <hr style="color: #F9D342; border-color: #F9D342; height: 3px;">
     <br>
     <div class="row">
         <div class="col-md-5 text-center">
@@ -64,7 +64,7 @@
         </div>
     </div>
     <br>
-    <hr style="color: #F9D342; border-color: #F9D342; height: 3px;">
+    <hr style="color: #F9D342; border-color: #F9D342; height: 3px;"> -->
     <footer>
 
     </footer>

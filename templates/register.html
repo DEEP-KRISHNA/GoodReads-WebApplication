@@ -1,0 +1,29 @@
+{%extends "basic_layout.html" %}
+
+{% block title %}
+<title>Register</title>
+{% endblock %}
+{% block body %}
+<br>
+<div class="row">
+    <div class="col-md-6 text-center">
+        <img src="/static/image/booklove.jpeg" height=40%>
+    </div>
+    <div class="col-md-6 text-left">
+        {% if request.method=='POST' %}
+        <h1>"{{request.form.get("name")}}"</h1>
+        <form action="{{url_for('register')}}" method="POST">
+            <input type="text" name="name" placeholder="Enter Your Name">
+            <button> submit </button>
+        </form>
+        {% else %}
+        <form action="{{url_for('register')}}" method="POST">
+            <input type="text" name="name" placeholder="Enter Your Name">
+            <button> submit </button>
+        </form>
+        {%endif%}
+    </div>
+</div>
+<br>
+<hr style="color: #F9D342; border-color: #F9D342; height: 3px;">
+{%endblock%}
