@@ -3,13 +3,42 @@
 {% block title %}
 <title>Register</title>
 {% endblock %}
+
+{% block header %}
+<header>
+    <div class="row">
+        <div class="col-md-1 text-center">
+            <br>
+        </div>
+        <div class="col-md-3 text-center">
+            <br>
+            <img src="/static/image/bookeventcrop.jpg" height=30%>
+        </div>
+        <div class="col-md-7 text-center">
+            <br>
+            <br>
+            <br>
+            <h1 class="text-center"><b><span style="color: #F9D342;">Deep Reads </span>Assure you Great Events<b></h1>
+        </div>
+
+    </div>
+</header>
+<hr style="color: #F9D342; border-color: #F9D342; height: 3px;">
+{% endblock %}
+
+
 {% block body %}
 <br>
 <div class="row">
-    <div class="col-md-6 text-center">
-        <img src="/static/image/booklove.jpeg" height=40%>
+    <div class="col-md-1 text-center">
+    </div>
+    <div class="col-md-5 text-center">
+        <img src="/static/image/bookperfectseason1.jpg" height=40%>
+        <img src="/static/image/bookperfectseason2.jpg" height=40%>
     </div>
     <div class="col-md-6 text-left">
+        <h1>Perfect Time for <span style="color: #F9D342;">Signing UP</span> </h1>
+        <br>
         {% if request.method=='POST' %}
         <h1>"{{request.form.get("name")}}"</h1>
         <form action="{{url_for('register')}}" method="POST">

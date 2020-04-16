@@ -28,20 +28,9 @@
 </head>
 
 <body style="background-color: black">
-    <header>
-        <div class="row">
-            <div class="col-md-6">
-                <br>
-                <h1 class="text-right"><b>Good Reads<b></h1>
-                <br>
-            </div>
-            <div class="col-md-6 text-left">
-                <br>
-                <img src="/static/image/Book_Reading.jpg" height=15%>
-            </div>
-        </div>
-    </header>
-    <hr style="color: #F9D342; border-color: #F9D342; height: 3px;">
+    {% block header %}
+    {% endblock %}
+
     {% block body %}
     {% endblock %}
     <!-- <hr style="color: #F9D342; border-color: #F9D342; height: 3px;">
