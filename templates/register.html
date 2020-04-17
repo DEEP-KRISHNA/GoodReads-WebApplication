@@ -37,20 +37,31 @@
         <img src="/static/image/bookperfectseason2.jpg" height=40%>
     </div>
     <div class="col-md-6 text-left">
-        <h1>Perfect Time for <span style="color: #F9D342;">Signing UP</span> </h1>
+        <h1>Perfect Time for <b><span style="color: #F9D342;">Signing UP</span></b> </h1>
         <br>
-        {% if request.method=='POST' %}
-        <h1>"{{request.form.get("name")}}"</h1>
-        <form action="{{url_for('register')}}" method="POST">
-            <input type="text" name="name" placeholder="Enter Your Name">
+        <!-- {% if request.method=='POST' %}
+        
+        {% else %} -->
+        <form action="{{url_for('login')}}" method="POST">
+            <h4 style="color: #F9D342;"><b>User Name</b></h4>
+            <input required="required" type="text" name="username" placeholder="Enter Your User Name">
+            <h4 style="color: #F9D342;"><b>Email ID</b></h4>
+            <input required="required" type="text" name="emailid" placeholder="Enter Your Email ID">
+            <h4 style="color: #F9D342;"><b>Password</b></h4>
+            <input required="required" type="password" name="password" placeholder="Enter Your Password">
+            <h4 style="color: #F9D342;"><b>Gender</b></h4>
+            <select required="required" id="gender" name="gender">
+                <option value="male">Masculine</option>
+                <option value="female">Feminine</option>
+                <option value="other" selected>Other</option>
+            </select>
+            <h4 style="color: #F9D342;"><b>Date of Birth</b></h4>
+            <input required="required" type="date" name="birthday" id="birthday">
+            <br>
+            <br>
             <button> submit </button>
         </form>
-        {% else %}
-        <form action="{{url_for('register')}}" method="POST">
-            <input type="text" name="name" placeholder="Enter Your Name">
-            <button> submit </button>
-        </form>
-        {%endif%}
+        <!-- {%endif%} -->
     </div>
 </div>
 <br>
