@@ -27,7 +27,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Set up database
-# engine = create_engine(os.getenv("DATABASE_URL"))
+engine = create_engine(os.getenv("DATABASE_URL"))
 # db = scoped_session(sessionmaker(bind=engine))
 
 
@@ -38,7 +38,8 @@ def index():
 
 @app.route("/register", methods=["GET"])
 def register():
-    return render_template("register.html")
+    message = "Hey!! Welcome for Registration"
+    return render_template("register.html", message=message)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -58,3 +59,13 @@ def login():
         db.session.commit()
     # "{{request.form.get("name")}}"
     return render_template("login.html")
+
+
+@app.route("/admin")
+def admin():
+    # details = User.query.all()
+    details = User.query.order_by(User.timestamp.asc()).all()
+    # stri = User.query.all()
+    # conn = engine.connect()
+    # resul = conn.execute(stri)
+    return render_template("admin.html", userdetails=details)

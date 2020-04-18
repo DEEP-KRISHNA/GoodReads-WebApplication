@@ -1,0 +1,69 @@
+{%extends "basic_layout.html" %}
+
+{% block title %}
+<title>Admin</title>
+{% endblock %}
+
+{% block header %}
+<header>
+    <div class="row">
+        <div class="col-md-1 text-center">
+            <br>
+        </div>
+        <div class="col-md-4 text-center">
+            <br>
+            <img src="/static/image/admin.jpg" height=30%>
+        </div>
+        <div class="col-md-6 text-center">
+            <br>
+            <br>
+            <br>
+            <h1 class="text-left"><b><span style="color: #F9D342;">Deep Reads </span>Admin, Welcome!<b></h1>
+        </div>
+
+    </div>
+</header>
+<hr style="color: #F9D342; border-color: #F9D342; height: 3px;">
+{% endblock %}
+
+
+{% block body %}
+<br>
+<div class="row">
+    <div class="col-md-2 text-center"><br></div>
+    <div class="col-md-8 text-center">
+        <h1>Following are the details of the Users:</h1>
+        <br>
+        <table style="width:100%">
+            <tr>
+                <th>
+                    <h3 style="color: #F9D342;">User Name</h3>
+                </th>
+                <th>
+                    <h3 style="color: #F9D342;">Password</h3>
+                </th>
+                <th>
+                    <h3 style="color: #F9D342;">Time Stamp</h3>
+                </th>
+            </tr>
+            {% for name in userdetails %}
+            <tr>
+                <td>
+                    <h4 class="text-center">{{name.username}}</h4>
+                </td>
+                <td>
+                    <h4 class="text-center">{{name.password}}</h4>
+                </td>
+                <td>
+                    <h4 class="text-center">{{name.timestamp}}</h4>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+    </div>
+</div>
+<br>
+<!-- <hr style="color: #F9D342; border-color: #F9D342; height: 3px;"> -->
+{%endblock%}
