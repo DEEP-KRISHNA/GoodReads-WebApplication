@@ -44,6 +44,7 @@ def register():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    message = "Hey Deep Reader, Welcome Back !!"
     if (request.method == "POST"):
         username = request.form.get("username")
         emailid = request.form.get("emailid")
@@ -51,21 +52,33 @@ def login():
         gender = request.form.get("gender")
         birthday = str(request.form.get("birthday"))
         now = datetime.now()
-        # timestamp = datetime.timestamp(now)
-        timestamp = str(now)
-        user = User(username=username, email=emailid, password=password,
-                    gender=gender, birthday=birthday, timestamp=timestamp)
-        db.session.add(user)
-        db.session.commit()
+        sampleuser = User.query.filter(User.username == username).all()
+        sampleemail = User.query.filter(User.email == emailid).all()
+        # app.logger.info(len(sampleuser))
+        if (len(sampleuser) != 0):
+            message = "This User Name already exists, Please Log IN"
+        elif (len(sampleemail) != 0):
+            message = "This Email ID already exists, Please Log IN"
+        else:
+            # timestamp = datetime.timestamp(now)
+            message = "Registration was success, Please Log IN"
+            timestamp = str(now)
+            user = User(username=username, email=emailid, password=password,
+                        gender=gender, birthday=birthday, timestamp=timestamp)
+            db.session.add(user)
+            db.session.commit()
     # "{{request.form.get("name")}}"
-    return render_template("login.html")
+    return render_template("login.html", message=message)
 
 
 @app.route("/admin")
 def admin():
     # details = User.query.all()
     details = User.query.order_by(User.timestamp.asc()).all()
-    # stri = User.query.all()
-    # conn = engine.connect()
-    # resul = conn.execute(stri)
+    # sample1 = User.query.filter(User.username == "Deep").all()
+    # sample2 = User.query.filter(User.username == "Deepp").all()
+    # app.logger.info("sample1")
+    # app.logger.info(len(sample1))
+    # app.logger.info("sample2")
+    # app.logger.info(len(sample2))
     return render_template("admin.html", userdetails=details)

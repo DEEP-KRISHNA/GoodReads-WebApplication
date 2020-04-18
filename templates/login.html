@@ -28,6 +28,7 @@
 
 
 {% block body %}
+<h2 class="text-center" style="color: #F9D342;">{{message}}</h2>
 <br>
 <div class="row">
     <div class="col-md-1 text-center">
@@ -44,6 +45,6 @@
 
     </div>
 </div>
-<br>
+<h3 class="text-center">LogIN / SignUP Confusion Happens <a href="{{url_for('register')}}">Sign UP</a></h3>
 <hr style="color: #F9D342; border-color: #F9D342; height: 3px;">
 {%endblock%}
