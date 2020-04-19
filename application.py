@@ -7,7 +7,7 @@ from models import *
 from sqlalchemy.orm import scoped_session, sessionmaker
 from sqlalchemy import create_engine
 from flask_session import Session
-from flask import Flask, session, render_template, request
+from flask import Flask, session, render_template, request, redirect, url_for, flash, get_flashed_messages
 
 # app = Flask(__name__)
 
@@ -38,8 +38,7 @@ def index():
 
 @app.route("/register", methods=["GET"])
 def register():
-    message = "Hey!! Welcome for Registration"
-    return render_template("register.html", message=message)
+    return render_template("register.html")
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -69,6 +68,24 @@ def login():
             db.session.commit()
     # "{{request.form.get("name")}}"
     return render_template("login.html", message=message)
+
+
+@app.route("/user", methods=["POST"])
+def user():
+    username = request.form.get("username")
+    password = request.form.get("password")
+    sampleuser = User.query.filter(User.username == username).all()
+    # app.logger.info(sampleuser)
+    if (len(sampleuser) == 0):
+        # message = "This User Name Doesn't exist, Please Sign UP"
+        flash("This User Name Doesn't exist, Please Sign UP")
+        return redirect(url_for('register'))
+    else:
+        if (sampleuser[0].password != password):
+            flash("Please enter correct Password")
+            return redirect(url_for('login'))
+        else:
+            return "Success"
 
 
 @app.route("/admin")

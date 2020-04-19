@@ -28,21 +28,39 @@
 
 
 {% block body %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for messagee in messages %}
+<h2 class="text-center" style="color:red;">{{messagee}}</h2>
+{% endfor %}
+{% else %}
 <h2 class="text-center" style="color: #F9D342;">{{message}}</h2>
-<br>
+{% endif %}
+{% endwith %}
 <div class="row">
     <div class="col-md-1 text-center">
     </div>
     <div class="col-md-3 text-left">
-        <img src="/static/image/bookperfectseason1.jpg" height=35%>
+        <br>
+        <br>
+        <img src="/static/image/bookperfectseason1.jpg" height=32%>
     </div>
     <div class="col-md-3 text-left">
-        <img src="/static/image/bookperfectseason2.jpg" height=35%>
+        <br>
+        <br>
+        <img src="/static/image/bookperfectseason2.jpg" height=32%>
     </div>
     <div class="col-md-5 text-left">
-        <h1>Perfect Time for <b><span style="color: #F9D342;">Logging IN</span></b> </h1>
-        <br>
-
+        <h1>Perfect Time for <b><span style="color: #F9D342;">Logging IN</span></b></h1>
+        <form action="{{url_for('user')}}" method="POST">
+            <h4 style="color: #F9D342;"><b>User Name</b></h4>
+            <input required="required" type="text" name="username" placeholder="Enter Your User Name">
+            <h4 style="color: #F9D342;"><b>Password</b></h4>
+            <input required="required" type="password" name="password" placeholder="Enter Your Password">
+            <br>
+            <br>
+            <button> submit </button>
+        </form>
     </div>
 </div>
 <h3 class="text-center">LogIN / SignUP Confusion Happens <a href="{{url_for('register')}}">Sign UP</a></h3>

@@ -28,7 +28,13 @@
 
 
 {% block body %}
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+{% for message in messages %}
 <h2 class="text-center" style="color: #F9D342;">{{message}}</h2>
+{% endfor %}
+{% endif %}
+{% endwith %}
 <br>
 <div class="row">
     <div class="col-md-1 text-center">
