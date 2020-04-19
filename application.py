@@ -70,8 +70,14 @@ def login():
     return render_template("login.html", message=message)
 
 
-@app.route("/user", methods=["POST"])
-def user():
+@app.route("/logout")
+def logout():
+    session.pop("USERNAME", None)
+    return redirect(url_for("login"))
+
+
+@app.route("/authentication", methods=["POST"])
+def authentication():
     username = request.form.get("username")
     password = request.form.get("password")
     sampleuser = User.query.filter(User.username == username).all()
@@ -85,7 +91,18 @@ def user():
             flash("Please enter correct Password")
             return redirect(url_for('login'))
         else:
-            return "Success"
+            session["USERNAME"] = str(sampleuser[0].username)
+            return redirect(url_for("user"))
+            # return render_template("user.html")
+
+
+@app.route("/user")
+def user():
+    if not session.get("USERNAME") is None:
+        username = session.get("USERNAME")
+        return render_template("user.html", user=username)
+    else:
+        return redirect(url_for("login"))
 
 
 @app.route("/admin")

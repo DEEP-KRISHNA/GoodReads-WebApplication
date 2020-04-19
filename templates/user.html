@@ -1,7 +1,7 @@
 {%extends "basic_layout.html" %}
 
 {% block title %}
-<title>Log IN</title>
+<title>{{user}}</title>
 {% endblock %}
 
 {% block header %}
@@ -28,7 +28,7 @@
 
 
 {% block body %}
-{% with messages = get_flashed_messages() %}
+<!-- {% with messages = get_flashed_messages() %}
 {% if messages %}
 {% for messagee in messages %}
 <h2 class="text-center" style="color:red;">{{messagee}}</h2>
@@ -36,33 +36,26 @@
 {% else %}
 <h2 class="text-center" style="color: #F9D342;">{{message}}</h2>
 {% endif %}
-{% endwith %}
+{% endwith %} -->
 <div class="row">
     <div class="col-md-1 text-center">
     </div>
     <div class="col-md-3 text-left">
-        <br>
-        <br>
-        <img src="/static/image/bookperfectseason1.jpg" height=32%>
+        <img src="/static/image/whyiread1.jpg" height=37%>
     </div>
     <div class="col-md-3 text-left">
-        <br>
-        <br>
-        <img src="/static/image/bookperfectseason2.jpg" height=32%>
+        <img src="/static/image/whyiread2.jpg" height=37%>
     </div>
-    <div class="col-md-5 text-left">
-        <h1>Perfect Time for <b><span style="color: #F9D342;">Logging IN</span></b></h1>
-        <form action="{{url_for('authentication')}}" method="POST">
-            <h4 style="color: #F9D342;"><b>User Name</b></h4>
-            <input required="required" type="text" name="username" placeholder="Enter Your User Name">
-            <h4 style="color: #F9D342;"><b>Password</b></h4>
-            <input required="required" type="password" name="password" placeholder="Enter Your Password">
-            <br>
-            <br>
-            <button> submit </button>
-        </form>
+    <div class="col-md-4 text-left">
+        <h2><b><span style="color: #F9D342;">{{user}}, </span>Why <span style="color: #F9D342;">You Read</span>?</b>
+        </h2>
+        <br>
+        <br>
+        <br>
+        <br>
+        <input class="text-right" type="button" value="LOG OUT"
+            onclick="window.open('{{url_for('logout')}}','_self');" />
     </div>
 </div>
-<h3 class="text-center">LogIN / SignUP Confusion Happens <a href="{{url_for('register')}}">Sign UP</a></h3>
 <hr style="color: #F9D342; border-color: #F9D342; height: 3px;">
 {%endblock%}
