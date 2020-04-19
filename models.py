@@ -20,6 +20,14 @@ class User(db.Model):
     timestamp = db.Column(db.String, nullable=False)
 
 
+class Book(db.Model):
+    __tablename__ = "books"
+    isbn = db.Column(db.String, primary_key=True, unique=True, nullable=False)
+    title = db.Column(db.String, nullable=False)
+    author = db.Column(db.String, nullable=False)
+    year = db.Column(db.String, nullable=False)
+
+
 def main():
     db.create_all()
 
