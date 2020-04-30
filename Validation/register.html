@@ -1,0 +1,260 @@
+<HTML>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.css">
+    <title>Register</title>
+    <script>
+        function passwordvalid(pass) {
+            if (pass.length <= 6) {
+                return false
+            }
+            else {
+                var small = 0
+                var big = 0
+                var num = 0
+                var special = 0
+                for (var i = 0; i < pass.length; i++) {
+                    if ('abcdefghijklmnopqrstuvwxyz'.indexOf(pass[i]) != -1) {
+                        small++;
+                    }
+                    else if ('ABCDEFGHIJKLMNOPQRSTUVWXYZ'.indexOf(pass[i]) != -1) {
+                        big++
+                    } else if ('0123456789'.indexOf(pass[i]) != -1) {
+                        num++
+                    } else {
+                        special++
+                    }
+                }
+                if (small === 0 || big === 0 || num === 0 || special === 0) {
+                    return false
+                }
+                else {
+                    return true
+                }
+            }
+        }
+        let counter = 0
+        let userflag = true
+        let passwordflag = true
+        let emailidflag = true
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelector('#submit').disabled = true;
+            document.querySelector('#username').onkeyup = () => {
+                console.log(document.querySelector('#username').value)
+                if (userflag) {
+                    counter += 1
+                    userflag = false
+                }
+                else {
+                    if (document.querySelector('#username').value === '') {
+                        counter -= 1
+                        userflag = true
+                    }
+                }
+                if (userflag === true) {
+                    console.log("Not a Valid User Name")
+                }
+                if (counter == 3) {
+                    document.querySelector('#submit').disabled = false;
+                } else {
+                    document.querySelector('#submit').disabled = true;
+                }
+                console.log(counter)
+            };
+            document.querySelector('#password').onkeyup = () => {
+                console.log(document.querySelector('#password').value)
+                password = document.querySelector('#password').value
+                passvalidflag = passwordvalid(password)
+                if (passvalidflag) {
+                    if (passwordflag) {
+                        counter += 1
+                        passwordflag = false
+                    }
+                }
+                if (passvalidflag === false) {
+                    if (!passwordflag) {
+                        counter -= 1
+                        passwordflag = true
+                    }
+                    console.log("Not a Valid Password")
+                }
+                if (counter == 3) {
+                    document.querySelector('#submit').disabled = false;
+                }
+                else {
+                    document.querySelector('#submit').disabled = true;
+                }
+                console.log(counter)
+            };
+            document.querySelector('#emailid').onkeyup = () => {
+                console.log(document.querySelector('#emailid').value);
+                emailid = document.querySelector('#emailid').value
+                emailvalid = true
+                let atind = emailid.indexOf("@")
+                let dotind = emailid.indexOf(".")
+                if (atind == -1 || dotind == -1) {
+                    emailvalid = false
+                }
+                if (emailvalid) {
+                    if (emailidflag) {
+                        counter += 1
+                        emailidflag = false
+                    }
+                }
+                if (emailvalid === false) {
+                    if (!emailidflag) {
+                        counter -= 1
+                        emailidflag = true
+                    }
+                    console.log("Not a Valid Email ID")
+                }
+                if (counter == 3) {
+                    document.querySelector('#submit').disabled = false;
+                }
+                else {
+                    document.querySelector('#submit').disabled = true;
+                }
+                console.log(counter)
+            };
+            // console.log(document.querySelector('#birthday').value != '');
+            // console.log(document.querySelector('#gender').value != 'others');
+
+            document.querySelector('#birthday').onkeyup = () => {
+                console.log(document.querySelector('#birthday').value);
+                // console.log(document.querySelector('#gender').value);
+            };
+
+            document.querySelector('#gender').onchange = () => {
+                // console.log(document.querySelector('#birthday').value);
+                console.log(document.querySelector('#gender').value);
+            };
+        })
+    </script>
+    <style>
+        table,
+        th,
+        td {
+            border: 2px solid #F9D342;
+            /* padding: 2px; */
+            /* border-spacing: 2px; */
+            border-collapse: collapse;
+        }
+
+        #dummy1 {
+            background-color: teal
+        }
+
+        h1 {
+            color: white;
+        }
+
+        h3 {
+            color: white;
+        }
+
+        h4 {
+            color: white;
+        }
+
+        h2 {
+            color: white;
+        }
+    </style>
+</head>
+
+<body style="background-color: black">
+    <header>
+        <div class="row">
+            <div class="col-md-1 text-center">
+                <br>
+            </div>
+            <div class="col-md-3 text-center">
+                <br>
+                <img src="/static/image/bookeventcrop.jpg" height=30%>
+            </div>
+            <div class="col-md-7 text-center">
+                <br>
+                <br>
+                <br>
+                <h1 class="text-center"><b><span style="color: #F9D342;">Deep Reads </span>Assure you Great Events<b>
+                </h1>
+            </div>
+
+        </div>
+    </header>
+    <hr style="color: #F9D342; border-color: #F9D342; height: 3px;">
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <h2 class="text-center" style="color: #F9D342;">{{message}}</h2>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <br>
+    <div class="row">
+        <div class="col-md-1 text-center">
+        </div>
+        <div class="col-md-5 text-center">
+            <img src="/static/image/bookperfectseason1.jpg" height=40%>
+            <img src="/static/image/bookperfectseason2.jpg" height=40%>
+        </div>
+        <div class="col-md-6 text-left">
+            <h1>Perfect Time for <b><span style="color: #F9D342;">Signing UP</span></b> </h1>
+            <br>
+            <!-- {% if request.method=='POST' %}
+            
+            {% else %} -->
+            <form id="registerform" action="{{url_for('login')}}" method="POST">
+                <h4 style="color: #F9D342;"><b>User Name</b></h4>
+                <input type="text" id="username" name="username" placeholder="Enter Your User Name">
+                <h4 style="color: #F9D342;"><b>Email ID</b></h4>
+                <input type="text" id="emailid" name="emailid" placeholder="Enter Your Email ID">
+                <h4 style="color: #F9D342;"><b>Password</b></h4>
+                <input type="password" id="password" name="password" autocomplete="off" autofocus
+                    placeholder="Enter Your Password">
+                <h4 style="color: #F9D342;"><b>Gender</b></h4>
+                <select id="gender" name="gender">
+                    <option value="male">Masculine</option>
+                    <option value="female">Feminine</option>
+                    <option value="other" selected>Other</option>
+                </select>
+                <h4 style="color: #F9D342;"><b>Date of Birth</b></h4>
+                <input type="date" id="birthday" name="birthday" id="birthday">
+                <br>
+                <br>
+                <button id="submit">submit</button>
+            </form>
+            <!-- {%endif%} -->
+        </div>
+    </div>
+    <h3 class="text-center">SignUP / LogIN Confusion Happens <a href="{{url_for('login')}}">Log IN</a></h3>
+    <hr style="color: #F9D342; border-color: #F9D342; height: 3px;">
+    <!-- <hr style="color: #F9D342; border-color: #F9D342; height: 3px;">
+    <br>
+    <div class="row">
+        <div class="col-md-5 text-center">
+            <img src="/static/image/booklove.jpeg" height=40%>
+        </div>
+        <div class="col-md-3 text-left">
+            <br>
+            <br>
+            <h4 class="text-left" style="color: #F9D342;">Already a Good Reader</h4>
+            <input type="button" value="LOG IN" onclick="window.open('howmsit.html', '_blank');" />
+        </div>
+        <div class="col-md-3 text-left">
+            <br>
+            <br>
+            <h4 class="text-left" style="color: #F9D342;">Wanna become a Good Reader</h4>
+            <input type="button" value="SIGN UP" onclick="window.open('{{url_for('register')}}');" />
+        </div>
+    </div>
+    <br>
+    <hr style="color: #F9D342; border-color: #F9D342; height: 3px;"> -->
+    <footer>
+
+    </footer>
+
+</body>
+
+</HTML>
